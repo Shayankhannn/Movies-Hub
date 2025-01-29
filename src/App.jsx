@@ -3,7 +3,7 @@ import Search from "./components/Search"
 import MovieLoader from "./components/MovieLoader";
 import MovieCard from "./components/MovieCard";
 import { useDebounce } from "react-use";
-import { updateSearchCount } from "./appwrite";
+import { getTrendingMovies, updateSearchCount } from "./appwrite";
 
 
 
@@ -47,7 +47,7 @@ function App() {
         return;
       }
 
-      setMovies(data.results || []);
+      setMovies(data.results || [ ]);
 
       if(query && data.results.length > 0){
        await  updateSearchCount(query,data.results[0]);
@@ -61,10 +61,23 @@ function App() {
     }
   };
 
+    const loadTrendingMovies = async () => {
+      try {
+        const movies = await getTrendingMovies();
+        setTrendingMovies(movies);
+
+      } catch (error) {
+        console.error("Error loading trending movies:", error);
+      }
+    }
 
   useEffect(()=>{
     fetchMovies(debounceSearchTerm);
-  },[debounceSearchTerm])
+  },[debounceSearchTerm]);
+
+  useEffect(()=>{
+    loadTrendingMovies();
+  },[]);
 
   return (
     <main>
@@ -78,8 +91,22 @@ function App() {
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
 
+    {trendingMovies.length > 0 && (
+      <section className="trending">
+        <h2 className="">Trending Movies</h2>
+        <ul>
+          {trendingMovies.map((movie,index) => (
+          <li key={movie.$id}>
+            <p>{index + 1} </p>
+            <img src={movie.poster_url} alt={movie.title} />
+            </li>
+          ))} 
+        </ul>
+        </section>
+        )}
+
       <section className="all-movies">
-        <h2 className="mt-[40px]">All Movies</h2>
+        <h2 >All Movies</h2>
        {loading ? (
         <MovieLoader/>): errorMessage ? (
           <p className="text-red-500">{errorMessage}</p>):(
