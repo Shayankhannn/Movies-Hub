@@ -21,9 +21,10 @@ function App() {
   const [debounceSearchTerm, setDebounceSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [movies, setMovies] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   
-  useDebounce(() => setDebounceSearchTerm(searchTerm), 1000, [searchTerm]);
+  useDebounce(() => setDebounceSearchTerm(searchTerm), 1300, [searchTerm]);
 
   const fetchMovies = async (query = '') => {
     setErrorMessage("");
@@ -59,6 +60,7 @@ function App() {
       setLoading(false);
     }
   };
+
 
   useEffect(()=>{
     fetchMovies(debounceSearchTerm);
