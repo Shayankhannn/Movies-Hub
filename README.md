@@ -1,3 +1,5 @@
+TODO : MODAL
+
 movies app using react 19
 
 will use appwrite an open source backend for react app
