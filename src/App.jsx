@@ -71,12 +71,12 @@ function App() {
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
 
-      <section className="trending">
+      <section className="all-movies">
         <h2 className="mt-[40px]">All Movies</h2>
        {loading ? (
         <MovieLoader/>): errorMessage ? (
           <p className="text-red-500">{errorMessage}</p>):(
-             <ul>
+             <ul className="">
               {movies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie}/>
               ))}

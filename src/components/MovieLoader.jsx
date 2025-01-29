@@ -3,41 +3,15 @@
 const MovieLoader = () => {
   return (
     <div className="flex flex-col items-center justify-center ">
-      {/* SVG Loader */}
-      <div className="relative w-24 h-24">
-        <svg
-          className="w-full h-full animate-spin-slow"
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Outer Film Strip */}
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            stroke="rgba(255, 255, 255, 0.2)"
-            strokeWidth="6"
-            className="animate-glow"
-          />
-          {/* Rolling Film Dots */}
-          {[...Array(8)].map((_, i) => (
-            <circle
-              key={i}
-              cx={50 + 40 * Math.cos((i * Math.PI) / 4)}
-              cy={50 + 40 * Math.sin((i * Math.PI) / 4)}
-              r="4"
-              fill="#00D1FF"
-              className="animate-pulse"
-            />
-          ))}
-        </svg>
+      {/* Neon Filmstrip */}
+      <div className="flex gap-2 items-center justify-center">
+        <div className="w-8 h-8 bg-purple-500 rounded-full animate-pulse-neon"></div>
+        <div className="w-8 h-8 bg-blue-500 rounded-full animate-pulse-neon delay-[300ms]"></div>
+        <div className="w-8 h-8 bg-pink-500 rounded-full animate-pulse-neon delay-[600ms]"></div>
       </div>
 
-      {/* Loading Text */}
-      <p className="mt-6 text-lg font-semibold tracking-wide text-blue-400 animate-fade">
-        Loading Movies...
-      </p>
+      {/* Glowing Movie Text */}
+      <p className="mt-6 text-lg font-semibold tracking-wide text-blue-400 animate-fade">Loading Movies...</p>
     </div>
   );
 };
