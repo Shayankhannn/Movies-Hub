@@ -3,6 +3,7 @@ import Search from "./components/Search"
 import MovieLoader from "./components/MovieLoader";
 import MovieCard from "./components/MovieCard";
 import { useDebounce } from "react-use";
+import { updateSearchCount } from "./appwrite";
 
 
 
@@ -37,7 +38,7 @@ function App() {
       } 
 
       const data = await response.json();
-      console.log(data);
+      
 
       if(data.Response === 'false'){
         setErrorMessage(data.Error || 'Something went wrong while fetching movies!');
@@ -46,6 +47,10 @@ function App() {
       }
 
       setMovies(data.results || []);
+
+      if(query && data.results.length > 0){
+       await  updateSearchCount(query,data.results[0]);
+      }
 
     } catch (error) {
       console.error("Error fetching movies:", error);
