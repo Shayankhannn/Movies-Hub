@@ -86,7 +86,7 @@ function App() {
     <div className="wrapper">
       <header>
         <img src="./hero.png" alt="Hero Banner" />
-        <h1>Find <span className="text-gradient">Movies</span> You&apos;ll Enjoy Without the Hassle</h1>
+        <h1>Find testing<span className="text-gradient">Movies</span> You&apos;ll Enjoy Without the Hassle</h1>
 
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
